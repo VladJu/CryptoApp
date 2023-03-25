@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">CryptoApp</string>
+    <string name="ivLogoPictureCoin">Логотип моенты</string>
+    <string name="symbols_template"> %s / %s </string>
+    <string name="last_update_template">Время последнего обновления : %s</string>
+    <string name="tvSlash">/</string>
+    <string name="tvPriceLabel">Цена:</string>
+    <string name="tvMinPriceLabel">Минимальная цена за день : </string>
+    <string name="tvMaxPriceLabel">Максимальная цена за день</string>
+    <string name="tvUpdate">Обновлено:</string>
+</resources>
