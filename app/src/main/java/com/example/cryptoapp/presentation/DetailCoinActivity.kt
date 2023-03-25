@@ -1,14 +1,15 @@
-package com.example.cryptoapp
+package com.example.cryptoapp.presentation
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.cryptoapp.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail_info_about_coin.*
 
-class DetailInfoAboutCoinActivity : AppCompatActivity() {
+class DetailCoinActivity : AppCompatActivity() {
     private lateinit var viewModel: CoinViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +42,7 @@ class DetailInfoAboutCoinActivity : AppCompatActivity() {
         //всегда когда передаем параметры из 1 активити в другую использовать такой способ инкапсулировать данные
         //чтобы CoinPriceInfoActivity ничего не занала о существовании каких нибудь ключей
         fun newIntent(context: Context, fromSymbol : String) : Intent {
-            val intent = Intent(context,DetailInfoAboutCoinActivity::class.java)
+            val intent = Intent(context, DetailCoinActivity::class.java)
             intent.putExtra(EXTRA_FROM_SYMBOL,fromSymbol)
             return intent
         }

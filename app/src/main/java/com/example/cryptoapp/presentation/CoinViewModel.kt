@@ -1,13 +1,13 @@
-package com.example.cryptoapp
+package com.example.cryptoapp.presentation
 
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.example.cryptoapp.api.ApiFactory
-import com.example.cryptoapp.database.AppDatabase
-import com.example.cryptoapp.pojo.CoinPriceInfo
-import com.example.cryptoapp.pojo.CoinPriceInfoRawData
+import com.example.cryptoapp.data.network.ApiFactory
+import com.example.cryptoapp.data.database.AppDatabase
+import com.example.cryptoapp.data.model.CoinPriceInfo
+import com.example.cryptoapp.data.model.CoinPriceInfoRawData
 import com.google.gson.Gson
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -19,9 +19,11 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
     private val compositeDisposable = CompositeDisposable()
 
     val priceList = db.coinPriceInfoDao().getPriceList()
+
     fun getDetailInfo(fSym : String) : LiveData<CoinPriceInfo> {
         return db.coinPriceInfoDao().getPriceInfoAboutCoin(fSym)
     }
+
     init {
         loadData()
     }
@@ -30,7 +32,8 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
         val disposable = ApiFactory.apiService.getTopCoinsInfo(limit = 20)
             // помощью(joinToString - превращает всю коллекцию в 1 строку и каждый элемент разделит
             .map { it.data?.map { it.coinInfo?.name }?.joinToString(",") as String }
-            //возьмет полученную строку и передаст строку внтрь блока{} в виде it
+            //возьмет полученную строку и передаст строку внтрь блока{} в виде it и загрузим
+                //всю инфо о валютах
             .flatMap { ApiFactory.apiService.getFullPriceList(fSyms = it) }
             .map { getPriceListFromRawData(it) }
             .delaySubscription(50,TimeUnit.SECONDS)

@@ -1,13 +1,12 @@
-package com.example.cryptoapp.database
+package com.example.cryptoapp.data.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.cryptoapp.pojo.CoinPriceInfo
+import com.example.cryptoapp.data.model.CoinPriceInfo
 
 @Database(entities = [CoinPriceInfo::class], version = 1, exportSchema = false)
-//в [ ] т.к надо передать массив классов помечаный @Entity
 abstract class AppDatabase : RoomDatabase() {
     companion object {
         private var db: AppDatabase? = null
@@ -16,14 +15,13 @@ abstract class AppDatabase : RoomDatabase() {
 
         fun getInstance(context: Context): AppDatabase {
             synchronized(LOCK){
-                db?.let { return it } //если бд не == null, то вернем значение
-                //данную переменнуб ввели для того чтобы возвращаемый тип был не nullабельный и не добавляли везде проверку на null
-                val instance = Room.databaseBuilder( //создаем новый объект бд
+                db?.let { return it }
+                val instance = Room.databaseBuilder(
                     context,
                     AppDatabase::class.java,
                     DATA_BASE_NAME
                 )
-                    .build()//тип переменной AppDatabase
+                    .build()
                 db = instance
                 return instance
             }
