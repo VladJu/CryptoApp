@@ -2,11 +2,11 @@ package com.example.cryptoapp.domain
 
 data class CoinInfoEntity(
     val fromSymbol: String,
-    val toSymbol: String? = null,
-    val price: Double? = null,
-    val lastUpdate: Int? = null,
-    val highDay: Double? = null,
-    val lowDay: Double? = null,
-    val lastMarket: String? = null,
+    val toSymbol: String?,
+    val price: Double?,
+    val lastUpdate: Int?,
+    val highDay: Double?,
+    val lowDay: Double?,
+    val lastMarket: String?,
     val imageUrl: String?
 )

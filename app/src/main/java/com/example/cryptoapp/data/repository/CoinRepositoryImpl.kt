@@ -30,18 +30,20 @@ class CoinRepositoryImpl(private val application: Application) : CoinRepository 
 
     override suspend fun loadData() {
         while (true) {
-            //1-получаем то популярных валют
-            val topCoins = apiService.getTopCoinsInfo(limit = 25)
-            //2- преобразоываваем все валюты в 1 строку
-            val fSyms = mapper.mapNamesLstToString(topCoins)
-            //по этой строке загружаем все необходимые данные из сети
-            val jsonContainerDto = apiService.getFullPriceList(fSyms = fSyms)
-            //3-преобразоываваем джсонконтейнер в коллекцию объектов Dto
-            val coinInfoDtoList = mapper.mapJsonContainerToListCoinInfo(jsonContainerDto)
-            //4- коллецию объектов Dto преобразуем в коллекцию DbModel
-            val dbModelList = coinInfoDtoList.map { mapper.mapDtoToDbModel(it) }
-            //5-вставляем данные в бд
-            coinInfoDao.insertPriceList(dbModelList)
+            //2
+            //добавялем tru/catch чтобы когда запустим приложение без интернета, то метод который
+            //обращается к сети вернет ошибку и мы ее обработаем чтбы не было краша
+            //Еслиу нас не будет интерента, упадем в блок catch (ничего выполненно не будет,
+            //устанвоится задержка и через 10 сек запрос повториться
+            try {
+                val topCoins = apiService.getTopCoinsInfo(limit = 25)
+                val fSyms = mapper.mapNamesLstToString(topCoins)
+                val jsonContainerDto = apiService.getFullPriceList(fSyms = fSyms)
+                val coinInfoDtoList = mapper.mapJsonContainerToListCoinInfo(jsonContainerDto)
+                val dbModelList = coinInfoDtoList.map { mapper.mapDtoToDbModel(it) }
+                coinInfoDao.insertPriceList(dbModelList)
+            } catch (e: Exception) {
+            }
             delay(10000)
         }
     }
