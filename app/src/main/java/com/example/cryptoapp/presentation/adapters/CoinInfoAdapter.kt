@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoapp.R
-import com.example.cryptoapp.data.model.CoinPriceInfo
+import com.example.cryptoapp.data.network.model.CoinInfoDto
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_coin_info.view.*
 
@@ -14,7 +14,7 @@ class CoinInfoAdapter(private val context: Context) :
     RecyclerView.Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {
 
     //коллекция объектов которые надо отображать
-    var coinInfoList: List<CoinPriceInfo> = listOf()
+    var coinInfoList: List<CoinInfoDto> = listOf()
         //когда переменной будем присваивать новое значение мы хотим вызывать метод notifyDataSetChanged(), поэтому переопределям сеттер для этой переменной
         set(value) {
             field = value
@@ -67,6 +67,6 @@ class CoinInfoAdapter(private val context: Context) :
     }
     // 1
     interface OnCoinClickListener{
-        fun  onCoinClick(coinPriceInfo: CoinPriceInfo)
+        fun  onCoinClick(coinPriceInfo: CoinInfoDto)
     }
 }
