@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.cryptoapp.R
 import com.example.cryptoapp.presentation.adapters.CoinInfoAdapter
 import com.example.cryptoapp.data.network.model.CoinInfoDto
+import com.example.cryptoapp.domain.CoinInfoEntity
 import kotlinx.android.synthetic.main.activity_coin_price_list.*
 
 
@@ -16,10 +17,9 @@ class CoinPriceListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coin_price_list)
         val adapter = CoinInfoAdapter(this)
-        // 4 слушатель клика
         adapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
-            override fun onCoinClick(coinPriceInfo: CoinInfoDto) {
-                val intent = DetailCoinActivity.newIntent(
+            override fun onCoinClick(coinPriceInfo: CoinInfoEntity) {
+                val intent = CoinDetailActivity.newIntent(
                     this@CoinPriceListActivity,
                     coinPriceInfo.fromSymbol
                 )
@@ -27,10 +27,8 @@ class CoinPriceListActivity : AppCompatActivity() {
             }
         }
         rvCoinPriceList.adapter = adapter
-        viewModel = ViewModelProvider
-            .AndroidViewModelFactory(application)
-            .create(CoinViewModel::class.java)
-        viewModel.priceList.observe(this) {
+        viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
+        viewModel.coinInfoList.observe(this) {
             adapter.coinInfoList = it
         }
     }
