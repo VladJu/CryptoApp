@@ -43,24 +43,12 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
-    //RxJava3
-    implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
-    implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
 
-    implementation "com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0"
-    // адаптер ретрофит для rxJava
-    implementation 'com.squareup.retrofit2:converter-gson:2.8.2' //конвертер GSON для retrofit2
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
 
-    def lifecycle_version = "2.5.1"
-    // ViewModel
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    // LiveData
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-    // Annotation processor (Обработчик анатации)
-    kapt "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
-    // optional - ReactiveStreams support for LiveData(поддержка реактивных потоков для LiveData)
-    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
-
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0' //конвертер GSON для retrofit2
 
     def room_version = "2.4.0"
     implementation "androidx.room:room-runtime:$room_version"
@@ -68,10 +56,9 @@ dependencies {
     // To use Kotlin annotation processing tool (kapt)
     kapt "androidx.room:room-compiler:$room_version"
 
-    //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-
+    implementation 'androidx.work:work-runtime-ktx:2.7.1'
 
 
 }
