@@ -6,18 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoapp.R
-import com.example.cryptoapp.data.network.ApiFactory.BASE_IMAGE_URL
 import com.example.cryptoapp.domain.CoinInfoEntity
-import com.example.cryptoapp.utils.TimeUtils.Companion.convertTimestampToTime
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_coin_info.view.*
 
 class CoinInfoAdapter(private val context: Context) :
     RecyclerView.Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {
 
-    //коллекция объектов которые надо отображать
     var coinInfoList: List<CoinInfoEntity> = listOf()
-        //когда переменной будем присваивать новое значение мы хотим вызывать метод notifyDataSetChanged(), поэтому переопределям сеттер для этой переменной
+        //когда переменной будем присваивать новое значение мы хотим вызывать метод notifyDataSetChanged(),
+        // поэтому переопределям сеттер для этой переменной
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -47,11 +45,9 @@ class CoinInfoAdapter(private val context: Context) :
                 tvSymbols.text = String.format(symbolsTemplate, fromSymbol, toSymbol)
                 tvPrice.text = price.toString()
                 tvLastTimeUpdate.text = String.format(
-                    lastUpdateTemplate, convertTimestampToTime(
-                        lastUpdate?.toLong()
-                    )
+                    lastUpdateTemplate, lastUpdate
                 )
-                Picasso.get().load(BASE_IMAGE_URL + imageUrl).into(ivLogoCoin)
+                Picasso.get().load(imageUrl).into(ivLogoCoin)
                 // 3 при клике на itemView будет првоерено занчение !=0 .onCoinClick(coin)
                 itemView.setOnClickListener {
                     onCoinClickListener?.onCoinClick(coin)
