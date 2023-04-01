@@ -11,12 +11,12 @@ import com.squareup.picasso.Picasso
 
 class CoinDetailFragment : Fragment() {
     private lateinit var viewModel: CoinViewModel
- //3
+
     private var _binding: FragmentDetailInfoAboutCoinBinding? = null
     private val binding: FragmentDetailInfoAboutCoinBinding
         get() = _binding ?: throw RuntimeException("FragmentDetailInfoAboutCoinBinding is null")
 
-//4
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,7 +25,7 @@ class CoinDetailFragment : Fragment() {
         _binding = FragmentDetailInfoAboutCoinBinding.inflate(inflater, container, false)
         return binding.root
     }
-//5
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val fromSymbol = getSymbol()
@@ -45,7 +45,6 @@ class CoinDetailFragment : Fragment() {
     }
 
 
-    // 2)получаем из агрументов строку
     private fun getSymbol(): String {
         return requireArguments().getString(EXTRA_FROM_SYMBOL, EMPTY_SYMBOL)
     }
@@ -55,7 +54,6 @@ class CoinDetailFragment : Fragment() {
         _binding = null
     }
 
-    // 1)
     companion object {
         private const val EXTRA_FROM_SYMBOL = "fSym"
         private const val EMPTY_SYMBOL = ""

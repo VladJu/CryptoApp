@@ -22,9 +22,6 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
     fun getDetailInfo(fSym: String) = getCoinDetailInfoUseCase(fSym)
 
     init {
-       // мы не можем suspend fun вызывать просто так их надо вызывать внутри скоупа
-        viewModelScope.launch {
             loadDataUseCase()
-        }
     }
 }
