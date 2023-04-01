@@ -21,7 +21,6 @@ class CoinPriceListActivity : AppCompatActivity() {
         setContentView(binding.root)
         val adapter = CoinInfoAdapter(this)
         adapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
-            //7 при клине на элмент списка надо его запускать либо На Активити Либо устанавливать Фрагмент
             override fun onCoinClick(coinPriceInfo: CoinInfoEntity) {
                 if (isBookMode()){
                     launchDetailActivity(coinPriceInfo.fromSymbol)
@@ -37,11 +36,11 @@ class CoinPriceListActivity : AppCompatActivity() {
             adapter.submitList(it)
         }
     }
-    //10
+
     private fun isBookMode() = binding.fragmentContainer==null
 
 
-    //9
+
     private fun launchDetailActivity(fromSymbol: String) {
         val intent = CoinDetailActivity.newIntent(
             this@CoinPriceListActivity, fromSymbol
@@ -50,7 +49,7 @@ class CoinPriceListActivity : AppCompatActivity() {
 
     }
 
-    //8
+
     private fun launchDetailFragment(fromSymbol: String) {
         supportFragmentManager.popBackStack()
         supportFragmentManager

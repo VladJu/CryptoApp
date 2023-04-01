@@ -4,10 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.cryptoapp.R
 import com.example.cryptoapp.databinding.ActivityDetailInfoAboutCoinBinding
-import com.squareup.picasso.Picasso
 
 class CoinDetailActivity : AppCompatActivity() {
 
@@ -18,13 +16,11 @@ class CoinDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        //Если не содержит такой ключ выходим из активити
         if (!intent.hasExtra(EXTRA_FROM_SYMBOL)) {
             finish()
             return
         }
         val fromSymbol = intent.getStringExtra(EXTRA_FROM_SYMBOL) ?: EMPTY_SYMBOL
-        //6 фрагмент надо устанавливать при 1 создании активити
         if (savedInstanceState==null){
             supportFragmentManager
                 .beginTransaction()
