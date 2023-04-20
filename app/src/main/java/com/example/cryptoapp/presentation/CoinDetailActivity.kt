@@ -26,7 +26,6 @@ class CoinDetailActivity : AppCompatActivity() {
                 .beginTransaction()
                 .replace(R.id.fragment_container,CoinDetailFragment.newInstance(fromSymbol))
                 .commit()
-
         }
     }
 
