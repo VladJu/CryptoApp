@@ -13,21 +13,17 @@ import dagger.Provides
 
 @Module
 interface DataModule {
-
     @Binds
     @ApplicationScope
     fun bindCoinRepository(impl: CoinRepositoryImpl) : CoinRepository
-
 
     companion object {
 
         @Provides
         @ApplicationScope
         fun provideCoinInfoDao(
-            //надо закинуть в граф при создании компанента
             application: Application
         ) : CoinInfoDao{
-            //поулчаем ссылку на бд и из нее получить реализацию интерфейса CoinInfoDao
             return AppDatabase.getInstance(application).coinPriceInfoDao()
         }
         @Provides

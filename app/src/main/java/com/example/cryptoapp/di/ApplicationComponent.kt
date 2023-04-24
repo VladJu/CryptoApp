@@ -9,10 +9,9 @@ import dagger.Component
 
 @ApplicationScope
 @Component(
-    modules = [DataModule::class, ViewModelModule::class]
+    modules = [DataModule::class, ViewModelModule::class, WorkerModule::class]
 )
 interface ApplicationComponent {
-    //при создании компонета будет закидывать объект application для этого созадем фабрику
 
     fun inject(activity: CoinPriceListActivity)
 
